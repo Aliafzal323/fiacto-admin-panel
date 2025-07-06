@@ -1,0 +1,1 @@
+class PlatformExceptions implements Exception {}
