@@ -1,7 +1,12 @@
-import 'package:dio_project/routes/app-route.dart';
-import 'package:dio_project/utils/theme/theme.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dio_project/common/widgets/responsiveness/screens/desktop_layout.dart';
+import 'package:dio_project/common/widgets/responsiveness/screens/mobile_layout.dart';
+import 'package:dio_project/common/widgets/responsiveness/screens/tablet_layout.dart';
+import 'package:dio_project/features/Dashboard/view/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:dio_project/routes/app-route.dart';
+import 'package:dio_project/utils/theme/theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,7 +23,7 @@ class MyApp extends StatelessWidget {
         name: '/page-not-found',
         page:
             () => Scaffold(
-              appBar: AppBar(title: Center( child: Text('Page not Found'))),
+              appBar: AppBar(title: Center(child: Text('Page not Found'))),
             ),
       ),
     );
@@ -46,12 +51,12 @@ class FirstScreen extends StatelessWidget {
           //   child: Text('Default Navigation'),
           // ),
           // SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Get.to(() => SecondScreen());
-            },
-            child: Text('Getx Navigation'),
-          ),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Get.to(() => SecondScreen());
+          //   },
+          //   child: Text('Getx Navigation'),
+          // ),
           SizedBox(height: 50),
           Text(
             'Named Navigation: GetX with Data Passing, data in Url, Data in url Wwith Arguments',
@@ -79,7 +84,15 @@ class FirstScreen extends StatelessWidget {
           SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              Get.toNamed('/second-screen/1234');
+              // Get.toNamed('/second-screen/1234');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ResponsiveDesignScreen();
+                  },
+                ),
+              );
             },
             child: Text('Getx Navigation'),
           ),
@@ -89,14 +102,32 @@ class FirstScreen extends StatelessWidget {
   }
 }
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
+class ResponsiveDesignScreen extends StatelessWidget {
+  const ResponsiveDesignScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Second Screen')),
-      body: Column(children: [Text(Get.parameters['userId'] ?? '')]),
+    return DasboardTemplate(
+      desktop: DesktopLayout(),
+      mobile: MobileLayout(),
+      tablet: TabletLayout(),
     );
+  }
+}
+
+class CustomColorContainer extends StatelessWidget {
+  const CustomColorContainer({
+    super.key,
+    required this.height,
+    required this.title,
+    this.width,
+  });
+  final double height;
+  final double? width;
+  final Text title;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(width: width, height: height, child: Center(child: title));
   }
 }

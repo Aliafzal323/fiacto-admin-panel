@@ -10,15 +10,15 @@ class AppPages {
       page: () => FirstScreen(),
       middlewares: [RouteMiddleWares()],
     ),
-    GetPage(
-      name: Routes.secondScreen,
-      page: () => SecondScreen(),
-      middlewares: [RouteMiddleWares()],
-    ),
-    GetPage(
-      name: Routes.secondScreenWithUid,
-      page: () => SecondScreen(),
-      middlewares: [RouteMiddleWares()],
-    ),
+    // GetPage(
+    //   name: Routes.secondScreen,
+    //   page: () => SecondScreen(),
+    //   middlewares: [RouteMiddleWares()],
+    // ),
+    // GetPage(
+    //   name: Routes.secondScreenWithUid,
+    //   page: () => SecondScreen(),
+    //   middlewares: [RouteMiddleWares()],
+    // ),
   ];
 }
