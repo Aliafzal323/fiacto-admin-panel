@@ -6,7 +6,7 @@ class AppSizes {
   static const double lg = 24.0;
   static const double xl = 32.0;
 
-//Icon Sized
+  //Icon Sized
   static const double iconXs = 12.0;
   static const double iconSm = 16.0;
   static const double iconMd = 24.0;
@@ -18,7 +18,7 @@ class AppSizes {
   static const double fontSizeMd = 16.0;
   static const double fontSizeLg = 18.0;
 
-//Button Sizes
+  //Button Sizes
   static const double buttonHeight = 18.0;
   static const double buttonRadius = 12.0;
   static const double buttonWidth = 120.0;
@@ -65,4 +65,12 @@ class AppSizes {
   static const double loaadingIndicatorSize = 36.0;
 
   static const double gridViewSpacing = 16.0;
+
+  static const double desktopScreenSize = 1366;
+
+  static const double tabletScreenSize = 768;
+
+  static const double mobileScreenSize = 360;
+
+  static const double customScreenSize = 1100;
 }

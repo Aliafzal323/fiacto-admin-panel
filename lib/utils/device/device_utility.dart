@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio_project/utils/constants/sizes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -103,5 +104,18 @@ class DeviceUtils {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  static bool isDesktopScreen(BuildContext context) {
+    return MediaQuery.of(context).size.width >= AppSizes.desktopScreenSize;
+  }
+
+  static bool isTabletScreen(BuildContext context) {
+    return MediaQuery.of(context).size.width >= AppSizes.tabletScreenSize &&
+        MediaQuery.of(context).size.width < AppSizes.desktopScreenSize;
+  }
+
+  static bool isMobileScreen(BuildContext context) {
+    return MediaQuery.of(context).size.width >= AppSizes.tabletScreenSize;
   }
 }

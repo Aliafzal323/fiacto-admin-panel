@@ -10,7 +10,7 @@ class DasboardTemplate extends StatelessWidget {
     this.mobile,
     this.tablet,
     this.desktop,
-    this.useLayout = true,
+    this.useLayout = false,
   });
 
   final Widget? mobile;
@@ -20,17 +20,23 @@ class DasboardTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveDesign(
-      mobile:
-          useLayout
-              ? MobileLayout(body: mobile ?? desktop)
-              : mobile ?? desktop ?? Container(),
-      tablet:
-          useLayout
-              ? TabletLayout(body: tablet ?? desktop)
-              : tablet ?? desktop ?? Container(),
-      desktop:
-          useLayout ? DesktopLayout(body: desktop) : desktop ?? Container(),
+    return Scaffold(
+      body: ResponsiveDesign(
+        mobile:
+        // useLayout
+        //     ?
+        MobileLayout(body: mobile),
+        // : mobile ?? desktop ?? Container(),
+        tablet:
+        // useLayout
+        //     ?
+        TabletLayout(body: tablet),
+        // : tablet ?? desktop ?? Container(),
+        desktop:
+        // useLayout ?
+        DesktopLayout(body: desktop),
+        // : desktop ?? Container(),
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dio_project/common/widgets/custom_drawer.dart';
+import 'package:dio_project/common/widgets/layouts/headers/header.dart';
 import 'package:flutter/material.dart';
 
 class MobileLayout extends StatelessWidget {
@@ -9,7 +10,7 @@ class MobileLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Mobile View")),
+      appBar: CustomAppHeader(),
       drawer: CustomDrawer(), // your own drawer
       body: body ?? Container(),
     );

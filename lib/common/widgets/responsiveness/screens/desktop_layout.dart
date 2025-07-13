@@ -1,4 +1,4 @@
-import 'package:dio_project/dio.dart';
+import 'package:dio_project/common/widgets/layouts/headers/header.dart';
 import 'package:flutter/material.dart';
 
 class DesktopLayout extends StatelessWidget {
@@ -13,16 +13,9 @@ class DesktopLayout extends StatelessWidget {
         children: [
           Expanded(flex: 1, child: Drawer()),
           Expanded(
-            flex: 2,
+            flex: 5,
             child: Column(
-              children: [
-                CustomColorContainer(
-                  width: double.infinity,
-                  height: 70,
-                  title: Text('Box1'),
-                ),
-                body ?? Container(),
-              ],
+              children: [const CustomAppHeader(), body ?? Container()],
             ),
           ),
         ],

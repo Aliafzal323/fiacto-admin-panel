@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio_project/common/widgets/responsiveness/screens/desktop_layout.dart';
 import 'package:dio_project/common/widgets/responsiveness/screens/mobile_layout.dart';
-import 'package:dio_project/common/widgets/responsiveness/screens/tablet_layout.dart';
 import 'package:dio_project/features/Dashboard/view/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: CustomAppTheme.lightTheme,
       darkTheme: CustomAppTheme.darkTheme,
@@ -107,27 +107,6 @@ class ResponsiveDesignScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DasboardTemplate(
-      desktop: DesktopLayout(),
-      mobile: MobileLayout(),
-      tablet: TabletLayout(),
-    );
-  }
-}
-
-class CustomColorContainer extends StatelessWidget {
-  const CustomColorContainer({
-    super.key,
-    required this.height,
-    required this.title,
-    this.width,
-  });
-  final double height;
-  final double? width;
-  final Text title;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(width: width, height: height, child: Center(child: title));
+    return DasboardTemplate(desktop: DesktopLayout(), mobile: MobileLayout());
   }
 }
