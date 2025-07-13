@@ -9,7 +9,7 @@ enum AssetIcons {
   citigroup,
   jpmorgan_chase,
   fund_balance_icon,
-  offer_management_icon,
+  offer,
   rent_icon,
   email_icon,
   line,

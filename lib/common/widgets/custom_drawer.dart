@@ -17,8 +17,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     // final user = context.select((AuthRepository value) => value.currentUser);
-
     return Container(
+      decoration: BoxDecoration(
+        border: Border(right: BorderSide(color: Colors.grey.shade300)),
+      ),
       width: MediaQuery.of(context).size.width * 0.78,
       padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
       child: Drawer(
@@ -79,7 +81,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     image: DecorationImage(
                       opacity: 1.2,
                       // opacity: 0.8,
-                      image: AssetImage('assets/images/drawer_background.png'),
+                      image: AssetImage('assets/images/simple_avatar.png'),
                     ),
                   ),
                 ),
@@ -121,10 +123,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
         )
         : Container(
           height: 130,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(color: Colors.grey),
-              left: BorderSide(color: Colors.grey),
+              bottom: BorderSide(color: context.grey200),
+              left: BorderSide(color: context.grey200),
             ),
             image: DecorationImage(
               opacity: 1.2,
@@ -192,7 +194,7 @@ class DrawerItemData {
       ),
       DrawerItemData(
         title: 'Offers',
-        icon: AssetIcons.offer_management_icon,
+        icon: AssetIcons.offer,
         onTap: () {
           // Navigator.of(context).pop();
           // Navigator.of(context).push(FundsBalancePage.route());
