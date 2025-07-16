@@ -17,6 +17,11 @@ extension TextThemeContext on BuildContext {
         fontWeight: FontWeight.w700,
       );
 
+  TextStyle get fourtyEight700 => basicStyle.withCustomFont(
+        fontSize: 48,
+        fontWeight: FontWeight.w700,
+      );
+
   TextStyle? get twentyFour700 => basicStyle.withCustomFont(
         fontSize: 24,
         fontWeight: FontWeight.w700,

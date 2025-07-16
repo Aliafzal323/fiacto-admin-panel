@@ -18,7 +18,12 @@ class CustomAppHeader extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         leading:
             !DeviceUtils.isDesktopScreen(context)
-                ? IconButton(onPressed: () {}, icon: Icon(Icons.menu))
+                ? IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  icon: Icon(Icons.menu),
+                )
                 : null,
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),

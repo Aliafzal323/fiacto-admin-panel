@@ -144,6 +144,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
     return [
       for (final DrawerItemData item in itemDataList)
         ListTile(
+          tileColor: context.primary100,
           leading:
               item.icon == null
                   ? null
