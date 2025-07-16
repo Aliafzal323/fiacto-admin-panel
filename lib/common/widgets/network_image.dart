@@ -52,9 +52,9 @@ class NetworkImageWidget extends StatelessWidget {
 
   Widget _buildPlaceholder() {
     return Image.asset(
-      placeholderAsset ?? 'assets/images/property_placeholder.jpg',
-      height: height ?? 150,
-      width: width ?? double.infinity,
+      placeholderAsset ?? 'assets/images/simple_avatar.png',
+      height: height ?? 40,
+      width: width ?? 40,
       fit: BoxFit.contain,
     );
   }

@@ -1,5 +1,6 @@
 import 'package:common/common.dart';
 import 'package:dio_project/common/widgets/custom_title_subtitle.dart';
+import 'package:dio_project/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -16,8 +17,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     // final user = context.select((AuthRepository value) => value.currentUser);
-
     return Container(
+      decoration: BoxDecoration(
+        border: Border(right: BorderSide(color: Colors.grey.shade300)),
+      ),
       width: MediaQuery.of(context).size.width * 0.78,
       padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
       child: Drawer(
@@ -49,68 +52,89 @@ class _CustomDrawerState extends State<CustomDrawer> {
     bool isFocalPerson,
     OverlayPortalController controller,
   ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const AssetIcon.monotone(AssetIcons.arrow_left),
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(Icons.close),
-              ),
-            ],
-          ),
-        ),
-        Stack(
+    return !DeviceUtils.isDesktopScreen(context)
+        ? Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 130,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  opacity: 1.2,
-                  // opacity: 0.8,
-                  image: AssetImage('assets/images/drawer_background.png'),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 20,
-              top: 30,
+            Padding(
+              padding: const EdgeInsets.all(16),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                 children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(color: context.white, spreadRadius: 12),
-                      ],
-                    ),
-                    child: const CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage('assets/images/Avatar.png'),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  CustomTitleSubtitle(
-                    subtitleStyle: context.twelve400.withColor(context.white),
-                    titleStyle: context.sixteen700.withColor(context.white),
-                    title: 'Robert Fox',
-                    subtitle: 'robertfox@email.com',
+                  const AssetIcon.monotone(AssetIcons.arrow_left),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(Icons.close),
                   ),
                 ],
               ),
             ),
+
+            Stack(
+              children: [
+                Container(
+                  height: 130,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      opacity: 1.2,
+                      // opacity: 0.8,
+                      image: AssetImage('assets/images/simple_avatar.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 20,
+                  top: 30,
+                  child: Row(
+                    children: [
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(color: context.white, spreadRadius: 12),
+                          ],
+                        ),
+                        child: const CircleAvatar(
+                          radius: 30,
+                          backgroundImage: AssetImage(
+                            'assets/images/Avatar.png',
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      CustomTitleSubtitle(
+                        subtitleStyle: context.twelve400.withColor(
+                          context.white,
+                        ),
+                        titleStyle: context.sixteen700.withColor(context.white),
+                        title: 'Robert Fox',
+                        subtitle: 'robertfox@email.com',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
           ],
-        ),
-        const SizedBox(height: 12),
-      ],
-    );
+        )
+        : Container(
+          height: 130,
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: context.grey200),
+              left: BorderSide(color: context.grey200),
+            ),
+            image: DecorationImage(
+              opacity: 1.2,
+              // opacity: 0.8,
+              image: AssetImage('assets/images/logo.png'),
+            ),
+          ),
+        );
   }
 
   List<Widget> _buildItemList(
@@ -120,6 +144,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
     return [
       for (final DrawerItemData item in itemDataList)
         ListTile(
+          tileColor: context.primary100,
           leading:
               item.icon == null
                   ? null
@@ -141,9 +166,11 @@ class DrawerItemData {
     required this.title,
     this.icon,
     this.onTap,
+    this.style,
     this.subRoutes = const [],
   });
   final String title;
+  final TextStyle? style;
   final AssetIcons? icon;
   final void Function()? onTap;
   final List<DrawerItemData> subRoutes;
@@ -151,35 +178,43 @@ class DrawerItemData {
   static List<DrawerItemData> data(BuildContext context) {
     return [
       DrawerItemData(
-        title: 'Offer Management',
-        icon: AssetIcons.offer_management_icon,
+        title: 'Home',
+        icon: AssetIcons.home,
         onTap: () {
           // Navigator.of(context).pop();
           // Navigator.of(context).push(OfferManagementPage.route());
         },
       ),
       DrawerItemData(
-        title: 'Rent/Purchase Management',
-        icon: AssetIcons.rent_icon,
+        title: 'Listings',
+        icon: AssetIcons.listings,
         onTap: () {
           // Navigator.of(context).pop();
           // Navigator.of(context).push(RentPurchaseManagementPage.route());
         },
       ),
       DrawerItemData(
-        title: 'Funds Balance',
-        icon: AssetIcons.fund_balance_icon,
+        title: 'Offers',
+        icon: AssetIcons.offer,
         onTap: () {
           // Navigator.of(context).pop();
           // Navigator.of(context).push(FundsBalancePage.route());
         },
       ),
       DrawerItemData(
-        title: 'Document Management',
-        icon: AssetIcons.document_management_icon,
+        title: 'Inspection',
+        icon: AssetIcons.inspections,
         onTap: () {
           // Navigator.of(context).pop();
           // Navigator.of(context).push(DocumentManagementPage.route());
+        },
+      ),
+      DrawerItemData(
+        title: 'Deals',
+        icon: AssetIcons.deals,
+        onTap: () {
+          // Navigator.of(context).pop();
+          // Navigator.of(context).push(MessagePage.route());
         },
       ),
       DrawerItemData(
@@ -187,7 +222,7 @@ class DrawerItemData {
         icon: AssetIcons.messages,
         onTap: () {
           // Navigator.of(context).pop();
-          // Navigator.of(context).push(MessagePage.route());
+          // Navigator.of(context).push(SettingPage.route());
         },
       ),
       DrawerItemData(
@@ -206,50 +241,46 @@ class DrawerItemData {
           // Navigator.of(context).push(HelpCenterPage.route());
         },
       ),
-      // DrawerItemData(
-      //   title: 'Log out',
-      //   icon: AssetIcons.authenticator_app,
-      //   onTap: () {
-      //     showDialog<AlertDialog>(
-      //       context: context,
-      //       builder: (BuildContext dialogContext) {
-      //         return AlertDialog(
-      //           title: Text(
-      //             'Are you sure you want to log out?',
-      //             style: context.twenty700,
-      //           ),
-      //           actions: <Widget>[
-      //             Row(
-      //               mainAxisAlignment: MainAxisAlignment.end,
-      //               children: [
-      //                 TextButton(
-      //                   child: Text(
-      //                     'Cancel',
-      //                     style: context.sixteen400,
-      //                   ),
-      //                   onPressed: () {
-      //                     Navigator.of(dialogContext)
-      //                         .pop(); // Dismiss alert dialog
-      //                   },
-      //                 ),
-      //                 TextButton(
-      //                   child: Text(
-      //                     'Yes, Confirm',
-      //                     style: context.sixteen400,
-      //                   ),
-      //                   onPressed: () {
-      //                     context.read<AuthRepository>().logOut();
-      //                   },
-      //                 ),
-      //               ],
-      //             ),
-      //           ],
-      //         );
-      //       },
-      //     );
-      //     //
-      //   },
-      // ),
+      DrawerItemData(
+        title: 'Log out',
+        style: context.fourteen400.withColor(context.error500),
+        icon: AssetIcons.authenticator_app,
+        onTap: () {
+          showDialog<AlertDialog>(
+            context: context,
+            builder: (BuildContext dialogContext) {
+              return AlertDialog(
+                title: Text(
+                  'Are you sure you want to log out?',
+                  style: context.twenty700,
+                ),
+                actions: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        child: Text('Cancel', style: context.sixteen400),
+                        onPressed: () {
+                          Navigator.of(
+                            dialogContext,
+                          ).pop(); // Dismiss alert dialog
+                        },
+                      ),
+                      TextButton(
+                        child: Text('Yes, Confirm', style: context.sixteen400),
+                        onPressed: () {
+                          // context.read<AuthRepository>().logOut();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          );
+          //
+        },
+      ),
     ];
   }
 }

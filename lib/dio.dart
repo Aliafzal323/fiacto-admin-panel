@@ -2,6 +2,7 @@
 import 'package:dio_project/common/widgets/responsiveness/screens/desktop_layout.dart';
 import 'package:dio_project/common/widgets/responsiveness/screens/mobile_layout.dart';
 import 'package:dio_project/features/Dashboard/view/dashboard.dart';
+import 'package:dio_project/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio_project/routes/app-route.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: CustomAppTheme.lightTheme,
       darkTheme: CustomAppTheme.darkTheme,
-      initialRoute: '/',
+      initialRoute: Routes.login,
       getPages: AppPages.pages,
       unknownRoute: GetPage(
         name: '/page-not-found',

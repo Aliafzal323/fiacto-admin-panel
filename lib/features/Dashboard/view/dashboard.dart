@@ -23,19 +23,15 @@ class DasboardTemplate extends StatelessWidget {
     return Scaffold(
       body: ResponsiveDesign(
         mobile:
-        // useLayout
-        //     ?
-        MobileLayout(body: mobile),
-        // : mobile ?? desktop ?? Container(),
+            useLayout
+                ? MobileLayout(body: mobile ?? desktop)
+                : mobile ?? desktop ?? Container(),
         tablet:
-        // useLayout
-        //     ?
-        TabletLayout(body: tablet),
-        // : tablet ?? desktop ?? Container(),
+            useLayout
+                ? TabletLayout(body: tablet ?? desktop)
+                : tablet ?? desktop ?? Container(),
         desktop:
-        // useLayout ?
-        DesktopLayout(body: desktop),
-        // : desktop ?? Container(),
+            useLayout ? DesktopLayout(body: desktop) : desktop ?? Container(),
       ),
     );
   }
